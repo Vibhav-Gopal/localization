@@ -15,7 +15,7 @@ def cb(obj):
     gyroZ = obj.gyroZ
 
     imuData = Imu()
-    imuData.header.frame_id = "base_link_frame"
+    imuData.header.frame_id = "base_link"
     imuData.orientation.x = imuData.orientation.y = imuData.orientation.z = imuData.orientation.w = 0
     imuData.orientation_covariance[0]=-1
     
@@ -30,12 +30,12 @@ def cb(obj):
     imuData.linear_acceleration.z = accZ
     for i in range(9):
         imuData.linear_acceleration_covariance[i] = 0
-    imuData.angular_velocity_covariance[0] = 1
-    imuData.angular_velocity_covariance[3] = 1
-    imuData.angular_velocity_covariance[6] = 1
-    imuData.linear_acceleration_covariance[0] = 1
-    imuData.linear_acceleration_covariance[3] = 1
-    imuData.linear_acceleration_covariance[6] = 1
+    imuData.angular_velocity_covariance[0] = 0.05
+    imuData.angular_velocity_covariance[3] = 0.05
+    imuData.angular_velocity_covariance[6] = 0.05
+    imuData.linear_acceleration_covariance[0] = 0.05
+    imuData.linear_acceleration_covariance[3] = 0.05
+    imuData.linear_acceleration_covariance[6] = 0.05
     pubber.publish(imuData)
     
 
@@ -44,5 +44,5 @@ def cb(obj):
 
 
 print("Processing initiated")
-rospy.Subscriber("/oakd_imu",imum,cb)
+rospy.Subscriber("/oakd/imu",imum,cb)
 rospy.spin()
