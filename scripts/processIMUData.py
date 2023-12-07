@@ -15,7 +15,7 @@ def cb(obj):
     gyroZ = obj.gyroZ
 
     imuData = Imu()
-    imuData.header.frame_id = "base_link"
+    imuData.header.frame_id = "base_link_frame"
     imuData.orientation.x = imuData.orientation.y = imuData.orientation.z = imuData.orientation.w = 0
     imuData.orientation_covariance[0]=-1
     
